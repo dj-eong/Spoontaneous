@@ -4,7 +4,7 @@
 
 Overview:
 
-Spoontaneous is a recipe website to satiate the spontaneous home cook. Whenever users aren’t sure what to cook or are searching for inspiration, they can simply type in an ingredient and receive a random simple recipe that makes use of said ingredient.
+Spoontaneous is a recipe webapp made to satiate the spontaneous home cook. Whenever users aren’t sure what to cook or are searching for inspiration, they can simply type in an ingredient and receive a random simple recipe that makes use of said ingredient.
 
 Demographic:
 
