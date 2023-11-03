@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     const list = await getIngredientsList();
 
     const input = document.querySelector('#search');
-    const form = document.querySelector('form');
+    const searchForm = document.querySelector('#searchform');
 
-    form.addEventListener('submit', async function (e) {
+    searchForm.addEventListener('submit', async function (e) {
         e.preventDefault();
         document.querySelector('main').innerText = '';
         //fuzzy search
@@ -71,7 +71,7 @@ function displayRecipe(recipe) {
     heading.innerText = recipe.strMeal;
     main.append(heading);
     const img = document.createElement('img');
-    img.setAttribute('src', recipe.strMealThumb);
+    img.setAttribute('src', recipe.strMealThumb + '/preview');
     main.append(img);
     const heading2 = document.createElement('h3');
     heading2.innerText = 'Ingredients';
@@ -89,4 +89,29 @@ function displayRecipe(recipe) {
     const instructions = document.createElement('p');
     instructions.innerText = recipe.strInstructions;
     main.append(instructions);
+
+    if (main.getAttribute('data')) {
+        displaySaveButton(recipe.idMeal);
+    }
+}
+
+function displaySaveButton(recipeId) {
+    const saveForm = document.createElement('form');
+
+    const saveButton = document.createElement('button');
+    saveButton.innerText = 'Save Recipe';
+    saveForm.append(saveButton);
+    document.querySelector('main').append(saveForm);
+
+    saveForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        saveButton.innerText = 'Saved!';
+        saveButton.disabled = true;
+        try {
+            await axios.post(`/saved-recipes/${recipeId}`);
+        } catch (error) {
+            saveForm.append('Already saved!');
+        }
+
+    });
 }

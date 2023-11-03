@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card w-25 mx-auto">
+        <h2 class="card-header custom-color text-center py-4">Login</h2>
+        <div class="card-body px-lg-5">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden'%}
+                <div class="md-form">
+                    {{field.label(class='font-weight-bold')}}
+                    {{field(class='form-control')}}
+
+                    {% for err in field.errors %}
+                    <small class="text-danger">{{err}}</small>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <button class="btn custom-color btn-rounded btn-block mt-4">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

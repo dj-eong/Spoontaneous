@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if not user.recipes %}
+<h3>Sorry, no recipes found</h3>
+{% else %}
+
+<ul>
+    {% for recipe in user.recipes %}
+    <li>
+        <a class='recipe' href="/recipe/{{recipe.recipe_id}}">
+            {{recipe.name}}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

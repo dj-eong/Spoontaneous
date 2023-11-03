@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <h2>{{recipe.strMeal}}</h2><img src="{{recipe.strMealThumb + '/preview'}}">
+    <h3>Ingredients</h3>
+
+    <li>225g new potatoes</li>
+    <li>100g green beans</li>
+    <li>1 tbsp sunflower oil</li>
+    <li>1 clove garlic</li>
+    <li>4 tsp Thai green curry paste</li>
+    <li>400ml coconut milk</li>
+    <li>2 tsp Thai fish sauce</li>
+    <li>1 tsp Sugar</li>
+    <li>450g boneless Chicken</li>
+    <li>2 fresh kaffir leaves lime</li>
+    <li>handfull basil</li>
+    <li>Boiled Rice</li>
+    <h3>Instructions</h3>
+    <p>
+        {{recipe.strInstructions}}
+    </p>
+</main>
+<script>
+
+</script>
+
+{% endblock %}
