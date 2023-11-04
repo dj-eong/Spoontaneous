@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, session, jsonify
+from flask import Flask, render_template, redirect, session, jsonify, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, SavedRecipe
 from forms import RegisterForm, LoginForm
@@ -42,6 +42,7 @@ def register():
             session['username'] = new_user.username
             return redirect('/')
         except:
+            flash('Username is taken!')
             return render_template('register-form.html', form=form)
 
     return render_template('register-form.html', form=form)
@@ -80,10 +81,28 @@ def save_recipe(recipe_id):
     db.session.commit()
     return jsonify(message='saved')
 
+@app.route('/saved-recipes/<int:recipe_id>', methods=["DELETE"])
+def unsave_recipe(recipe_id):
+    """Removes user + saved recipe row in database"""
+    user = db.session.query(User).filter_by(username=session['username']).first()
+    saved_recipe = db.session.query(SavedRecipe).filter(SavedRecipe.user_id == user.id, SavedRecipe.recipe_id == recipe_id).first()
+    
+    db.session.delete(saved_recipe)
+    db.session.commit()
+    return jsonify(message='deleted')
+
 @app.route('/saved-recipes')
-def list_recipes():
+def list_saved_recipes():
     user = db.session.query(User).filter_by(username=session['username']).first()
     return render_template('saved-recipes.html', user=user)
+
+@app.route('/api/saved-recipes')
+def get_saved_recipes():
+    user = db.session.query(User).filter_by(username=session['username']).first()
+    lst = []
+    for recipe in user.recipes:
+        lst.append(recipe.recipe_id)
+    return jsonify(lst)
 
 @app.route('/recipe/<int:recipe_id>')
 def show_recipe(recipe_id):

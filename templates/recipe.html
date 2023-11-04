@@ -2,7 +2,7 @@
 
 {% block content %}
 <main>
-    <h2>{{recipe.strMeal}}</h2><img src="{{recipe.strMealThumb + '/preview'}}">
+    <h2 data="{{recipe.idMeal}}">{{recipe.strMeal}}</h2><img src="{{recipe.strMealThumb + '/preview'}}">
     <h3>Ingredients</h3>
 
     <li>225g new potatoes</li>
@@ -22,8 +22,60 @@
         {{recipe.strInstructions}}
     </p>
 </main>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
 <script>
+    checkIfSaved(document.querySelector('h2').getAttribute('data'));
 
+    async function checkIfSaved(recipeId) {
+        const res = await axios.get('/api/saved-recipes');
+        if (res.data.includes(parseInt(recipeId))) {
+            displayUnsaveButton(recipeId);
+        } else {
+            displaySaveButton(recipeId);
+        }
+    }
+
+    function displaySaveButton(recipeId) {
+        const saveForm = document.createElement('form');
+
+        const saveButton = document.createElement('button');
+        saveButton.innerText = 'Save Recipe';
+        saveForm.append(saveButton);
+        document.querySelector('main').append(saveForm);
+
+        saveForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            displayUnsaveButton(recipeId);
+            saveButton.remove();
+
+            try {
+                await axios.post(`/saved-recipes/${recipeId}`);
+            } catch (error) {
+                saveForm.append('Already saved!');
+            }
+        });
+    }
+
+    function displayUnsaveButton(recipeId) {
+        const unsaveForm = document.createElement('form');
+
+        const unsaveButton = document.createElement('button');
+        unsaveButton.innerText = 'Unsave Recipe';
+        unsaveForm.append(unsaveButton);
+        document.querySelector('main').append(unsaveForm);
+
+        unsaveForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            displaySaveButton(recipeId);
+            unsaveButton.remove();
+
+            try {
+                await axios.delete(`/saved-recipes/${recipeId}`);
+            } catch (error) {
+                unsaveForm.append('It was never saved!');
+            }
+        });
+    }
 </script>
 
 {% endblock %}

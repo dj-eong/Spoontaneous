@@ -64,7 +64,7 @@ async function getMealRecipe(ingredient) {
 }
 
 // display meal and recipe on DOM
-function displayRecipe(recipe) {
+async function displayRecipe(recipe) {
     const main = document.querySelector('main');
 
     const heading = document.createElement('h2');
@@ -91,7 +91,12 @@ function displayRecipe(recipe) {
     main.append(instructions);
 
     if (main.getAttribute('data')) {
-        displaySaveButton(recipe.idMeal);
+        const res = await axios.get('/api/saved-recipes');
+        if (res.data.includes(parseInt(recipe.idMeal))) {
+            displayUnsaveButton(recipe.idMeal);
+        } else {
+            displaySaveButton(recipe.idMeal);
+        }
     }
 }
 
@@ -105,13 +110,34 @@ function displaySaveButton(recipeId) {
 
     saveForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-        saveButton.innerText = 'Saved!';
-        saveButton.disabled = true;
+        displayUnsaveButton(recipeId);
+        saveButton.remove();
+
         try {
             await axios.post(`/saved-recipes/${recipeId}`);
         } catch (error) {
             saveForm.append('Already saved!');
         }
+    });
+}
 
+function displayUnsaveButton(recipeId) {
+    const unsaveForm = document.createElement('form');
+
+    const unsaveButton = document.createElement('button');
+    unsaveButton.innerText = 'Unsave Recipe';
+    unsaveForm.append(unsaveButton);
+    document.querySelector('main').append(unsaveForm);
+
+    unsaveForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        displaySaveButton(recipeId);
+        unsaveButton.remove();
+
+        try {
+            await axios.delete(`/saved-recipes/${recipeId}`);
+        } catch (error) {
+            unsaveForm.append('It was never saved!');
+        }
     });
 }
