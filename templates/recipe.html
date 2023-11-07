@@ -1,29 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main data="{{recipe.idMeal}}">
-    <h2>{{recipe.strMeal}}</h2><img src="{{recipe.strMealThumb + '/preview'}}">
-    <h3>Ingredients</h3>
+<main data="{{recipe.idMeal}}" class="container my-5">
+    <div class="card custom-color recipe-container">
+        <h2 class="card-header text-color text-center d-flex justify-content-between">{{recipe.strMeal}}</h2><img
+            src="{{recipe.strMealThumb}}" class="recipe-image">
+        <h3 class="text-color mt-1 mb-0">Ingredients</h3>
 
-    <li>225g new potatoes</li>
-    <li>100g green beans</li>
-    <li>1 tbsp sunflower oil</li>
-    <li>1 clove garlic</li>
-    <li>4 tsp Thai green curry paste</li>
-    <li>400ml coconut milk</li>
-    <li>2 tsp Thai fish sauce</li>
-    <li>1 tsp Sugar</li>
-    <li>450g boneless Chicken</li>
-    <li>2 fresh kaffir leaves lime</li>
-    <li>handfull basil</li>
-    <li>Boiled Rice</li>
-    <h3>Instructions</h3>
-    <p>
-        {{recipe.strInstructions}}
-    </p>
+        <ul class="ingredients-list">
+            <li class="ingr-item">{{recipe.strMeasure1}} {{recipe.strIngredient1}}</li>
+            <li class="ingr-item">{{recipe.strMeasure2}} {{recipe.strIngredient2}}</li>
+            <li class="ingr-item">{{recipe.strMeasure3}} {{recipe.strIngredient3}}</li>
+            <li class="ingr-item">{{recipe.strMeasure4}} {{recipe.strIngredient4}}</li>
+            <li class="ingr-item">{{recipe.strMeasure5}} {{recipe.strIngredient5}}</li>
+            <li class="ingr-item">{{recipe.strMeasure6}} {{recipe.strIngredient6}}</li>
+            <li class="ingr-item">{{recipe.strMeasure7}} {{recipe.strIngredient7}}</li>
+            <li class="ingr-item">{{recipe.strMeasure8}} {{recipe.strIngredient8}}</li>
+            <li class="ingr-item">{{recipe.strMeasure9}} {{recipe.strIngredient9}}</li>
+            <li class="ingr-item">{{recipe.strMeasure10}} {{recipe.strIngredient10}}</li>
+            <li class="ingr-item">{{recipe.strMeasure11}} {{recipe.strIngredient11}}</li>
+            <li class="ingr-item">{{recipe.strMeasure12}} {{recipe.strIngredient12}}</li>
+            <li class="ingr-item">{{recipe.strMeasure13}} {{recipe.strIngredient13}}</li>
+            <li class="ingr-item">{{recipe.strMeasure14}} {{recipe.strIngredient14}}</li>
+            <li class="ingr-item">{{recipe.strMeasure15}} {{recipe.strIngredient15}}</li>
+            <li class="ingr-item">{{recipe.strMeasure16}} {{recipe.strIngredient16}}</li>
+            <li class="ingr-item">{{recipe.strMeasure17}} {{recipe.strIngredient17}}</li>
+            <li class="ingr-item">{{recipe.strMeasure18}} {{recipe.strIngredient18}}</li>
+            <li class="ingr-item">{{recipe.strMeasure19}} {{recipe.strIngredient19}}</li>
+            <li class="ingr-item">{{recipe.strMeasure20}} {{recipe.strIngredient20}}</li>
+        </ul>
+
+        <h3 class="text-color mt-0 mb-0">Instructions</h3>
+        <p class="instructions text-color">
+            {{recipe.strInstructions}}
+        </p>
+    </div>
 </main>
 <!-- <script src="https://unpkg.com/axios/dist/axios.js"></script> -->
 <script>
+    function removeEmptyLi() {
+        const list = document.querySelectorAll('li');
+        for (let li of list) {
+            if (!li.innerText) {
+                li.remove();
+            }
+        }
+    }
+
+    removeEmptyLi();
     checkIfSaved(document.querySelector('main').getAttribute('data'));
 
     async function checkIfSaved(recipeId) {
@@ -37,47 +61,51 @@
         }
     }
 
-    function displaySaveButton(recipeId) {
-        const saveForm = document.createElement('form');
+    // function displaySaveButton(recipeId) {
+    //     const saveForm = document.createElement('form');
 
-        const saveButton = document.createElement('button');
-        saveButton.innerText = 'Save Recipe';
-        saveForm.append(saveButton);
-        document.querySelector('main').append(saveForm);
+    //     const saveButton = document.createElement('button');
+    //     saveForm.setAttribute('class', 'button-form');
+    //     saveButton.innerText = 'Save Recipe';
+    //     saveButton.classList.add('btn');
+    //     saveForm.append(saveButton);
+    //     document.querySelector('h2').append(saveForm);
 
-        saveForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
-            displayUnsaveButton(recipeId);
-            saveButton.remove();
+    //     saveForm.addEventListener('submit', async function (e) {
+    //         e.preventDefault();
+    //         displayUnsaveButton(recipeId);
+    //         saveButton.remove();
 
-            try {
-                await axios.post(`/saved-recipes/${recipeId}`);
-            } catch (error) {
-                saveForm.append('Already saved!');
-            }
-        });
-    }
+    //         try {
+    //             await axios.post(`/saved-recipes/${recipeId}`);
+    //         } catch (error) {
+    //             saveForm.append('Already saved!');
+    //         }
+    //     });
+    // }
 
-    function displayUnsaveButton(recipeId) {
-        const unsaveForm = document.createElement('form');
+    // function displayUnsaveButton(recipeId) {
+    //     const unsaveForm = document.createElement('form');
 
-        const unsaveButton = document.createElement('button');
-        unsaveButton.innerText = 'Unsave Recipe';
-        unsaveForm.append(unsaveButton);
-        document.querySelector('main').append(unsaveForm);
+    //     const unsaveButton = document.createElement('button');
+    //     unsaveForm.setAttribute('class', 'button-form');
+    //     unsaveButton.innerText = 'Unsave Recipe';
+    //     unsaveButton.classList.add('btn');
+    //     unsaveForm.append(unsaveButton);
+    //     document.querySelector('h2').append(unsaveForm);
 
-        unsaveForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
-            displaySaveButton(recipeId);
-            unsaveButton.remove();
+    //     unsaveForm.addEventListener('submit', async function (e) {
+    //         e.preventDefault();
+    //         displaySaveButton(recipeId);
+    //         unsaveButton.remove();
 
-            try {
-                await axios.delete(`/saved-recipes/${recipeId}`);
-            } catch (error) {
-                unsaveForm.append('It was never saved!');
-            }
-        });
-    }
+    //         try {
+    //             await axios.delete(`/saved-recipes/${recipeId}`);
+    //         } catch (error) {
+    //             unsaveForm.append('It was never saved!');
+    //         }
+    //     });
+    // }
 </script>
 
 {% endblock %}
