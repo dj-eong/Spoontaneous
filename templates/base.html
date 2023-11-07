@@ -7,19 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spoontaneous</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/static/style.css">
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuzzysort@2.0.4/fuzzysort.min.js"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg custom-color">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="/" class="navbar-brand">
                     <span>Spoontaneous</span>
                 </a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
+            <form id="searchform" class="navbar-form">
+                <input type="text" class="form-control" id="search" placeholder="Type in an ingredient">
+            </form>
+            <ul class="nav navbar-nav">
                 {% if not user %}
                 <li><a href="/register">sign up</a></li>
                 <li><a href="/login">log in</a></li>
@@ -32,6 +38,7 @@
     </nav>
     {% block content %}
     {% endblock %}
+    <script src="../static/app.js"></script>
 </body>
 
 </html>

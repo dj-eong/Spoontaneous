@@ -1,16 +1,12 @@
 .custom-color {
-    background: linear-gradient(to right, #64b5f6, #4dd0e1);
+    background: linear-gradient(to right, #e24343, #eb5c31);
     color: white;
-}
-
-.navbar-brand {
-    padding-left: 15px;
 }
 
 .navbar {
     background-color: #fff;
-    height: 46px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    height: 50px;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.25); */
     margin-bottom: 1rem;
     position: sticky;
     top: 0;
@@ -18,33 +14,25 @@
     z-index: 9999;
 }
 
-.navbar a {
-    color: #66757f;
-    font-size: 13px;
-    font-weight: bold;
+.navbar li {
+    /* color: #66757f; */
+    color: white;
+    font-size: 16px;
+    font-weight: light;
     text-decoration: none;
 }
 
-.navbar a:hover {
-    color: #1c94e0;
-}
-
 .navbar-brand {
-    display: flex;
-    align-items: center;
+    padding-left: 15px;
+    font-size: 20px;
 }
 
-.navbar-brand>img {
-    display: inline-block;
-    margin-bottom: 2px;
-    margin-right: 5px;
-    width: 20px;
-    border-radius: 2px;
+.navbar a {
+    color: white;
 }
 
-.nav>li>a>img {
-    width: 32px;
-    border-radius: 32px;
+.navbar a:hover {
+    color: #c6cacc;
 }
 
 ul.nav.navbar-nav {
@@ -52,11 +40,21 @@ ul.nav.navbar-nav {
 }
 
 ul.nav.navbar-nav li {
-    margin: 0 0.5rem;
-    display: flex;
+    margin: 0 1rem;
+    /* display: flex; */
 }
 
 nav form.navbar-form {
     display: flex;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0)
+}
+
+.clickable-item {
+    cursor: pointer;
+}
+
+.clickable-item:hover {
+    background-color: #eeeeee;
 }

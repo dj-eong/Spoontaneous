@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
         if (results[0]?.target) {
             const inp = document.createElement('p');
-            inp.innerText = 'The ingredient you searched for is ' + results[0].target;
+            console.log('The ingredient you searched for is ' + results[0].target);
             document.querySelector('main').append(inp);
             const recipe = await getMealRecipe(formatIngredient(results[0].target));
             if (recipe) displayRecipe(recipe);
@@ -105,6 +105,7 @@ function displaySaveButton(recipeId) {
 
     const saveButton = document.createElement('button');
     saveButton.innerText = 'Save Recipe';
+    saveButton.setAttribute('class', "btn custom-color btn-rounded mt-4 col-1");
     saveForm.append(saveButton);
     document.querySelector('main').append(saveForm);
 
@@ -126,6 +127,7 @@ function displayUnsaveButton(recipeId) {
 
     const unsaveButton = document.createElement('button');
     unsaveButton.innerText = 'Unsave Recipe';
+    unsaveButton.setAttribute('class', "btn custom-color btn-rounded mt-4 col-1");
     unsaveForm.append(unsaveButton);
     document.querySelector('main').append(unsaveForm);
 
