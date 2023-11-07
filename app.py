@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, session, jsonify, flash
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, SavedRecipe
 from forms import RegisterForm, LoginForm
 import requests
@@ -14,8 +14,8 @@ connect_db(app)
 db.create_all()
 
 app.config['SECRET_KEY'] = 'abc123'
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-debug = DebugToolbarExtension(app)
+# app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+# debug = DebugToolbarExtension(app)
 
 
 @app.route('/')

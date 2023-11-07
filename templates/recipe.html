@@ -36,12 +36,12 @@
         </p>
     </div>
 </main>
-<!-- <script src="https://unpkg.com/axios/dist/axios.js"></script> -->
+
 <script>
     function removeEmptyLi() {
         const list = document.querySelectorAll('li');
         for (let li of list) {
-            if (!li.innerText) {
+            if (!li.innerText || li.innerText == "None None") {
                 li.remove();
             }
         }
@@ -60,52 +60,6 @@
             }
         }
     }
-
-    // function displaySaveButton(recipeId) {
-    //     const saveForm = document.createElement('form');
-
-    //     const saveButton = document.createElement('button');
-    //     saveForm.setAttribute('class', 'button-form');
-    //     saveButton.innerText = 'Save Recipe';
-    //     saveButton.classList.add('btn');
-    //     saveForm.append(saveButton);
-    //     document.querySelector('h2').append(saveForm);
-
-    //     saveForm.addEventListener('submit', async function (e) {
-    //         e.preventDefault();
-    //         displayUnsaveButton(recipeId);
-    //         saveButton.remove();
-
-    //         try {
-    //             await axios.post(`/saved-recipes/${recipeId}`);
-    //         } catch (error) {
-    //             saveForm.append('Already saved!');
-    //         }
-    //     });
-    // }
-
-    // function displayUnsaveButton(recipeId) {
-    //     const unsaveForm = document.createElement('form');
-
-    //     const unsaveButton = document.createElement('button');
-    //     unsaveForm.setAttribute('class', 'button-form');
-    //     unsaveButton.innerText = 'Unsave Recipe';
-    //     unsaveButton.classList.add('btn');
-    //     unsaveForm.append(unsaveButton);
-    //     document.querySelector('h2').append(unsaveForm);
-
-    //     unsaveForm.addEventListener('submit', async function (e) {
-    //         e.preventDefault();
-    //         displaySaveButton(recipeId);
-    //         unsaveButton.remove();
-
-    //         try {
-    //             await axios.delete(`/saved-recipes/${recipeId}`);
-    //         } catch (error) {
-    //             unsaveForm.append('It was never saved!');
-    //         }
-    //     });
-    // }
 </script>
 
 {% endblock %}

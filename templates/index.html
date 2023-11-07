@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main {% if user %}data="{{user.username}}" {% endif %}></main>
+<main {% if user %}data="{{user.username}}" {% endif %}>
+    <span style="text-align: center;">
+        <i class="fa fa-arrow-up" aria-hidden="true" style="font-size: 8rem; display: block; margin: 0 auto;"></i>
+        <p style="text-align: center; font-size: 1.5rem; margin-top: 1rem;">in goes an ingredient,<br>out comes a
+            recipe.
+        </p>
+    </span>
 
-<!-- <script src="https://unpkg.com/axios/dist/axios.js"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/fuzzysort@2.0.4/fuzzysort.min.js"></script> -->
-<!-- <script src="../static/app.js"></script> -->
+    <span
+        style="position: absolute; left: 50%; transform: translate(-50%, 0); top: 50%;  color:rgb(245, 245, 245); display: flex;">
+        <i class="fa fa-spoon" aria-hidden="true" style="font-size: 10rem;"></i>
+        <h1 style="font-size: 10rem; font-weight: bold;">SPOONTANEOUS</h1>
+        <i class="fa fa-cutlery" aria-hidden="true" style="font-size: 10rem;"></i>
+
+    </span>
+
+</main>
 {% endblock %}
