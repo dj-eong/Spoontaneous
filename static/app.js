@@ -66,29 +66,43 @@ async function getMealRecipe(ingredient) {
 // display meal and recipe on DOM
 async function displayRecipe(recipe) {
     const main = document.querySelector('main');
+    main.setAttribute('class', 'container my-5');
 
+    const div = document.createElement('div');
+    div.setAttribute('class', 'card custom-color recipe-container');
+    main.append(div);
     const heading = document.createElement('h2');
     heading.innerText = recipe.strMeal;
-    main.append(heading);
+    heading.setAttribute('class', 'card-header text-color text-center d-flex justify-content-between');
+    div.append(heading);
     const img = document.createElement('img');
-    img.setAttribute('src', recipe.strMealThumb + '/preview');
-    main.append(img);
+    img.setAttribute('src', recipe.strMealThumb);
+    img.setAttribute('class', 'recipe-image');
+    div.append(img);
     const heading2 = document.createElement('h3');
     heading2.innerText = 'Ingredients';
-    main.append(heading2);
+    heading2.setAttribute('class', 'text-color mt-1 mb-0');
+    div.append(heading2);
+
+    const ul = document.createElement('ul');
+    ul.setAttribute('class', 'ingredients-list');
+    div.append(ul);
     for (let i = 1; i <= 20; i++) {
         if (recipe[`strIngredient${i}`]) {
             const li = document.createElement('li');
             li.innerText = recipe[`strMeasure${i}`] + ' ' + recipe[`strIngredient${i}`];
-            main.append(li);
+            li.setAttribute('class', 'ingr-item');
+            ul.append(li);
         }
     }
     const heading3 = document.createElement('h3');
     heading3.innerText = 'Instructions';
-    main.append(heading3);
+    heading3.setAttribute('class', 'text-color mt-0 mb-0');
+    div.append(heading3);
     const instructions = document.createElement('p');
-    instructions.innerText = recipe.strInstructions;
-    main.append(instructions);
+    instructions.innerHTML = recipe.strInstructions;
+    instructions.setAttribute('class', 'instructions text-color');
+    div.append(instructions);
 
     if (main.getAttribute('data')) {
         const res = await axios.get('/api/saved-recipes');
@@ -105,9 +119,9 @@ function displaySaveButton(recipeId) {
 
     const saveButton = document.createElement('button');
     saveButton.innerText = 'Save Recipe';
-    saveButton.setAttribute('class', "btn custom-color btn-rounded mt-4 col-1");
+    saveButton.setAttribute('class', "btn btn-rounded color");
     saveForm.append(saveButton);
-    document.querySelector('main').append(saveForm);
+    document.querySelector('h2').append(saveForm);
 
     saveForm.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -127,9 +141,9 @@ function displayUnsaveButton(recipeId) {
 
     const unsaveButton = document.createElement('button');
     unsaveButton.innerText = 'Unsave Recipe';
-    unsaveButton.setAttribute('class', "btn custom-color btn-rounded mt-4 col-1");
+    unsaveButton.setAttribute('class', "btn btn-rounded color");
     unsaveForm.append(unsaveButton);
-    document.querySelector('main').append(unsaveForm);
+    document.querySelector('h2').append(unsaveForm);
 
     unsaveForm.addEventListener('submit', async function (e) {
         e.preventDefault();

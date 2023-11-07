@@ -106,6 +106,8 @@ def get_saved_recipes():
 
 @app.route('/recipe/<int:recipe_id>')
 def show_recipe(recipe_id):
+    if 'username' not in session:
+        return redirect('/')
     user = db.session.query(User).filter_by(username=session['username']).first()
     data = get_recipe(recipe_id)
     recipe = data['meals'][0]

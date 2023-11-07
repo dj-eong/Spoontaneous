@@ -58,3 +58,51 @@ nav form.navbar-form {
 .clickable-item:hover {
     background-color: #eeeeee;
 }
+
+/* Custom CSS for color customization */
+/* Adjust text color */
+.text-color {
+    color: white;
+    padding: 20px;
+}
+
+.color {
+    color: white;
+}
+
+/* Styling for the recipe container */
+.recipe-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Styling for the image */
+.recipe-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Styling for the ingredients list */
+.ingredients-list {
+    list-style: circle;
+    margin-left: 20px;
+}
+
+/* Styling for each ingredient item */
+.ingr-item {
+    margin-bottom: 5px;
+}
+
+/* Styling for the instructions */
+.instructions {
+    margin-top: 0;
+    padding-top: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.button-form {
+    display: flex;
+    align-items: center;
+    color: white;
+}
