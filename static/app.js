@@ -26,7 +26,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             const recipe = await getMealRecipe(formatIngredient(results[0].target));
             if (recipe) displayRecipe(recipe);
         } else {
-            document.querySelector('main').innerText = 'No recipe found with this ingredient';
+            const p = document.createElement('p');
+            p.innerText = 'No recipe found with this ingredient';
+            p.setAttribute('class', 'text-center');
+            document.querySelector('main').append(p);
         }
         input.value = '';
     });
@@ -55,7 +58,6 @@ function formatIngredient(ingredient) {
 async function getMealRecipe(ingredient) {
     const res = await axios.get(BASE_URL + 'filter.php?i=' + ingredient);
     if (!res.data.meals) {
-        document.querySelector('main').innerText = 'No recipe found with this ingredient';
         return false;
     }
     const mealId = res.data.meals[Math.floor(Math.random() * res.data.meals.length)].idMeal;
