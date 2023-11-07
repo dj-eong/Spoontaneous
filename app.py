@@ -6,7 +6,8 @@ import requests
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///spoontaneous'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///spoontaneous'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ckfqxttq:adoyJ81OEVNc8XvRr4jlawSmThFJP28s@bubble.db.elephantsql.com/ckfqxttq'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
