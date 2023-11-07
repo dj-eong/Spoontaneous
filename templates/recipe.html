@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<main>
-    <h2 data="{{recipe.idMeal}}">{{recipe.strMeal}}</h2><img src="{{recipe.strMealThumb + '/preview'}}">
+<main data="{{recipe.idMeal}}">
+    <h2>{{recipe.strMeal}}</h2><img src="{{recipe.strMealThumb + '/preview'}}">
     <h3>Ingredients</h3>
 
     <li>225g new potatoes</li>
@@ -22,16 +22,18 @@
         {{recipe.strInstructions}}
     </p>
 </main>
-<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.js"></script> -->
 <script>
-    checkIfSaved(document.querySelector('h2').getAttribute('data'));
+    checkIfSaved(document.querySelector('main').getAttribute('data'));
 
     async function checkIfSaved(recipeId) {
-        const res = await axios.get('/api/saved-recipes');
-        if (res.data.includes(parseInt(recipeId))) {
-            displayUnsaveButton(recipeId);
-        } else {
-            displaySaveButton(recipeId);
+        if (document.querySelector('main').getAttribute('data')) {
+            const res = await axios.get('/api/saved-recipes');
+            if (res.data.includes(parseInt(recipeId))) {
+                displayUnsaveButton(recipeId);
+            } else {
+                displaySaveButton(recipeId);
+            }
         }
     }
 

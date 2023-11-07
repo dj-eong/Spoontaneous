@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-{% if not user.recipes %}
-<h3>Sorry, no recipes found</h3>
-{% else %}
-
-<ul>
-    {% for recipe in user.recipes %}
-    <li>
-        <a class='recipe' href="/recipe/{{recipe.recipe_id}}">
-            {{recipe.name}}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
+<main {% if user %}data="{{user.username}}" {% endif %}>
+    {% if not user.recipes %}
+    <h3>Sorry, no recipes found</h3>
+    {% else %}
+    <div class="container my-5 col-3">
+        <ul class="list-group">
+            {% for recipe in user.recipes %}
+            <li class="list-group-item clickable-item" onclick="window.location='/recipe/{{recipe.recipe_id}}';">
+                <a class='recipe text-dark' href="/recipe/{{recipe.recipe_id}}">
+                    {{recipe.name}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</main>
 {% endblock %}
