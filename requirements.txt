@@ -10,12 +10,14 @@ Flask-DebugToolbar==0.10.1
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 greenlet==2.0.2
+gunicorn==21.2.0
 idna==2.8
 importlib-metadata==6.6.0
 itsdangerous==0.24
 jedi==0.13.1
 Jinja2==2.10
 MarkupSafe==1.1.1
+packaging==23.2
 parso==0.8.3
 psycopg2-binary==2.8.4
 pycparser==2.19
