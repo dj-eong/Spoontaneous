@@ -57,26 +57,3 @@ class SavedRecipe(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     recipe_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
-
-"""
-Table users {
-  id integer [primary key]
-  username string
-  password text
-  email string
-}
-
-Table recipes {
-  id integer [primary key]
-  name string
-}
-
-Table saved_recipes {
-  id integer [primary key]
-  users_id integer
-  recipes_id integer
-}
-
-Ref: users.id < saved_recipes.users_id
-Ref: recipes.id < saved_recipes.recipes_id
-"""
