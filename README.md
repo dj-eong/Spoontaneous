@@ -18,6 +18,30 @@ Spoontaneous is a very simple webapp, with two main functionalities:
    
    When coming across a recipe that they really like, or may want to try out later, the save feature is crucial.
 
+## Usage
+
+To run Spoontaneous locally, follow these steps:
+
+1. Make sure you have [Python v3.7.9](https://www.python.org/downloads/release/python-379/) and [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) installed
+
+   1.5 (Optional) Create a [virtual environment](https://packaging.python.org/en/latest/tutorials/installing-packages/#creating-and-using-virtual-environments) and activate it
+
+2. Install all of Spoontaneous' dependencies/requirements by running the following command in your terminal
+```
+$ pip install -r requirements.txt
+```
+
+3. Create your local database and title it `spoontaneous`
+```
+$ createdb spoontaneous
+```
+
+4. Set your DATABASE_URL environment variable and run the application!
+```
+$ DATABASE_URL=postgresql:///spoontaneous flask run
+```
+
+
 ## User Flow
 
 Users can choose to login/create an account at any time, but may use the site anonymously. The user types in an ingredient, and the website returns either a random recipe that uses the searched ingredient, or returns a message saying no recipe can be found with the ingredient (depending on API results). If the user is logged in, they may save the recipe for future use. Users can access their saved recipes list, look at each saved recipe in detail, and unsave them if they wish.
